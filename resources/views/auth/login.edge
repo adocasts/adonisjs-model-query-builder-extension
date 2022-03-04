@@ -1,0 +1,32 @@
+@layout('layouts/main')
+
+@section('content')
+
+  <form action="{{ route('auth.login') }}" method="POST">
+    {{ csrfField() }}
+
+    @if (flashMessages.has('form'))
+      <div role="alert">
+        {{ flashMessages.get('form') }}
+      </div>
+    @endif
+
+    @!input({
+      label: 'Username or Email',
+      name: 'uid',
+      value: flashMessages.get('uid'),
+      errors: flashMessages.get('errors.uid')
+    })
+
+    @!input({
+      type: 'password',
+      label: 'Password',
+      name: 'password',
+      errors: flashMessages.get('errors.password')
+    })
+
+    <button type="submit">Login</button>
+  </form>
+
+
+@endsection
